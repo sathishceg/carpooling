@@ -1,0 +1,46 @@
+<%= form_for(@trip) do |f| %>
+  <% if @trip.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
+
+      <ul>
+      <% @trip.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.fields_for :start_location do |start_location_fields| %>
+    <div class="field">
+        <%= start_location_fields.label "Start Location" %><br />
+        <%= start_location_fields.text_field :address %>
+     </div>
+  <% end %>
+
+  <%= f.fields_for :end_location do |end_location_fields| %>
+    <div class="field">
+        <%= end_location_fields.label "End Location" %><br />
+        <%= end_location_fields.text_field :address %>
+     </div>
+  <% end %>
+
+ <div class="field">
+    <%= f.label :start_time %><br />
+    <%= f.datetime_select :start_time %>
+  </div>
+  <div class="field">
+    <%= f.label :taxi_type %><br />
+    <%= select(:trip, :taxi_type, options_for_select([['4 Persons', '0'], ['6 Persons', '1'], ['8 Persons', '2']])) %>
+  </div>
+  <div class="field">
+    <%= f.label :number_of_free_seats %><br />
+    <%= select(:trip, :number_of_free_seats, options_for_select([['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5'], ['6', '6'], ['7', '7']])) %>
+    <!--%= f.number_field :number_of_free_seats %-->
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+
+<% end %>

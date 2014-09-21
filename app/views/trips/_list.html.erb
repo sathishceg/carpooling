@@ -1,0 +1,37 @@
+
+<table>
+  <tr>
+    <th>Start Location</th>
+    <th>End Location</th>
+    <th>Start time</th>
+    <th>Number of free seats</th>
+    <th>Fare</th>
+    <th>Taxi typ</th>
+    <th>Created by</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @trips.each do |trip| %>
+  <tr>
+    <td><%= trip.start_location.address %></td>
+    <td><%= trip.end_location.address %></td>
+    <td><%= trip.start_time %></td>
+    <td><%= trip.number_of_free_seats %></td>
+    <td><%= trip.fare %> €</td>
+    <% if trip.taxi_type == 0 %>
+        <td>4 Personen</td>
+    <% elsif trip.taxi_type == 1%>
+        <td>6 Personen</td>
+    <% else %>
+        <td>8 Personen</td>
+    <% end %>
+    <td><%= link_to User.find(trip.created_by).alias, User.find(trip.created_by) %></td>
+    <td><%= link_to 'Show', trip %></td>
+    <td><%=if correct_user?(trip);link_to 'Edit', edit_trip_path(trip)end%></td>
+    <td><%=if correct_user?(trip);link_to 'Destroy', trip, confirm: 'Are you sure?', method: :delete end%></td>
+  </tr>
+<% end %>
+</table>
+

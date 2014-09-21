@@ -1,0 +1,95 @@
+<h1><%= @user.alias %>'s profile</h1>
+<p>
+  <b>Member since:</b>
+  <%= @user.created_at.strftime("%d.%m.%Y") %>
+</p>
+<p>
+  <b>Name:</b>
+  <%=@name %>
+</p>
+<p>
+  <b>Gender:</b>
+  <%= @user_profile.gender %>
+</p>
+<p>
+  <b>Age:</b>
+  <%= @age%>
+</p>
+<p>
+  <b>Residence:</b>
+  <%= @user_profile.residence %>
+</p>
+<p>
+  <b>About me:</b>
+  <%= @user_profile.about_you %>
+</p>
+
+
+<% if @is_current_user %>
+    <h2>private area</h2>
+    <p>
+        <b>Your contact information:</b><br>
+        <%= @user_profile.contact_info %>
+    </p>
+    <%= link_to 'Edit your profile',edit_user_profile_path(@user_profile) %>
+
+    <p>
+        <h3> Your booked trips:</h3>
+        <table>
+            <tr>
+                <th>Start Location</th>
+                <th>End Location</th>
+                <th>Start time</th>
+                <th>Number of free seats</th>
+                <th>Fare</th>
+                <th>Taxi type</th>
+                <th></th>
+                <th></th>
+
+            </tr>
+
+            <%  bookings = Booking.find_all_by_user_id(@user.id) %>
+            <%  bookings.each do |booking|  %>
+               <% if booking.trip.start_time >= Date.today %>
+                <tr>
+                    <% start_location = Location.find(booking.trip.start_location_id) %>
+                    <% end_location = Location.find(booking.trip.end_location_id) %>
+                    <td><%= start_location.address %></td>
+                    <td><%= end_location.address %></td>
+                    <td><%= booking.trip.start_time %></td>
+                    <td><%= booking.trip.number_of_free_seats %></td>
+                    <td><%= booking.trip.fare %> €</td>
+                    <% if booking.trip.taxi_type == 0 %>
+                        <td>4 Personen</td>
+                    <% elsif booking.trip.taxi_type == 1%>
+                        <td>6 Personen</td>
+                    <% else %>
+                        <td>8 Personen</td>
+                    <% end %>
+                    <td><%= link_to 'Show', booking.trip %></td>
+                    <td><%= link_to 'Edit', booking.trip %></td>
+                </tr>
+              <% end %>
+            <% end %>
+        </table>
+    </p>
+<% end %>
+
+
+<h3><%= @user.alias %>'s Ratings:</h3>
+<% ratings = Rating.find_all_by_user_id(@user.id) %>
+<% ratings.each do |rating| %>
+  <div>
+    <% if rating.rating_type == 0 %>
+        Positive:<%= rating.comment %>
+    <% end %>  
+  </div>
+<% end %>
+</br>
+<% ratings.each do |rating| %>
+  <div>
+    <% if rating.rating_type == 1 %>
+        Negative:<%= rating.comment %>
+    <% end %>  
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<pre style="font-family: Verdana, Arial, sans serif;">
+Hello <%= @creator.alias %>,
+
+Your Trip 
+
+from:	<b><%= @trip.start_location.address%></b>
+to:		<b><%= @trip.end_location.address%></b>
+at:		<b><%= @trip.start_time.strftime("%d.%b.%Y %H:%M") %></b>
+
+was booked by <%= @booker.alias %>.
+
+Please contact him to clarify the details.
+
+The Contact information of <%= @booker.alias %> is:
+
+<b><%= @booker_profile.contact_info %></b>
+
+Have a great ride!
+
+Yours,
+
+cabshare
+</pre>

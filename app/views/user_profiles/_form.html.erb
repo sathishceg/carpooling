@@ -1,0 +1,47 @@
+<%= form_for @user_profile do |f| %>
+  <% if @user_profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user_profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :forename %><br />
+    <%= f.text_field :forename%>
+  </div>
+  <div class="field">
+    <%= f.label :surname %><br />
+    <%= f.text_field :surname %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.select :gender, options_for_select([['female', 'female'], ['male', 'male']]) %>
+  </div>
+  <div class="field">
+    <%= f.label :date_of_birth %><br />
+    <%= f.date_select :date_of_birth, :start_year => 1910, :end_year => Time.now.year - 16 %>
+  </div>
+  <div class="field">
+    <%= f.label :residence %><br />
+    <%= f.text_field :residence %>
+  </div>
+
+  <div class="field">
+    <%= f.label :about_you%><br />
+    <%= f.text_area :about_you %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_info %><br />
+    <%= f.text_area :contact_info %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,42 @@
+<h1>Listing trips</h1>
+
+<%= render 'list' %>
+
+<br/>
+<%= if logged_in?;link_to 'New Trip', new_trip_path; end %>
+
+<br />
+<br />
+
+<h2>Find trips starting near you:</h2>
+<%= form_tag(trips_path, :method => "get") do %>
+  <%= label_tag "Start: " %>
+  <%= text_field_tag :search_start %>
+  <%= label_tag "Radius: " %>
+  <%= select_tag :radius_start, options_for_select([['500 m', '0.5'], ['1 km', '1'], ['1,5 km', '1.5']]) %>
+  <br />
+  <%= label_tag "End: " %>
+  <%= text_field_tag :search_end %>
+  <%= label_tag "Radius: " %>
+  <%= select_tag :radius_end, options_for_select([['500 m', '0.5'], ['1 km', '1'], ['1,5 km', '1.5']]) %>
+  <br />
+  <%= label_tag "Time range from: " %>
+  <%= datetime_select("datetime_start", :datetime_start) %>
+  <br />
+  <%= label_tag "To: " %>
+  <%= datetime_select("datetime_end", :datetime_end, :default => DateTime.tomorrow) %>
+  <br />
+  <%= label_tag "Free seats: " %>
+  <%= number_field_tag :free_seats %>
+  <br />
+  <%= submit_tag "Search" %>
+<% end %>
+
+<br />
+<%= if (@map_start_point.present? && @map_end_point.present?); gmaps({
+    "map_options" => { "center_longitude" => 180, "zoom" => 3, "auto_adjust" => true},
+     "direction"   => { "data"    => { "from" => @map_start_point, "to" => @map_end_point} ,
+                        "options" => {"travelMode" => "DRIVING", "display_panel" => true, "panel_id" => "instructions"}
+ }
+    }); end
+    %>
