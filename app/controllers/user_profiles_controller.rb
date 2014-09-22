@@ -8,7 +8,7 @@ class UserProfilesController < ApplicationController
 
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html 
       format.json { render json: @location }
     end
   end
@@ -21,7 +21,7 @@ class UserProfilesController < ApplicationController
     @user_profile = UserProfile.find(params[:id])
     respond_to do |format|
 
-      # now update the trip
+
       if @user_profile.update_attributes(params[:user_profile])
         format.html { redirect_to user_path(User.find_by_user_profile_id(@user_profile.id)), notice: "Now that's what I call a nice profile'!" }
         format.json { head :ok }

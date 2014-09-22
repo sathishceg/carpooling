@@ -9,18 +9,16 @@ class TripsController < ApplicationController
   helper_method :can_book?
   helper_method :has_created_trip?
 
-  # GET /trips
-  # GET /trips.json
   def index
     @found = false
 
     if (params[:search_start].present? && params[:search_end].present?)
-      #@trips = Trip.search(params)
+
       @trips = search_trips
       @map_start_point = params[:search_start]
       @map_end_point = params[:search_end]
     else
-      #@trips = Trip.all
+
       @trips = Trip.where('start_time >= ?', DateTime.now)
     end
 
@@ -34,43 +32,36 @@ class TripsController < ApplicationController
 
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html 
       format.json { render json: @trips }
     end
   end
 
-  # GET /trips/1
-  # GET /trips/1.json
   def show
     @trip = Trip.find(params[:id])
     @user = User.find(@trip.created_by)
     @booking = @user.bookings.build
     respond_to do |format|
-      format.html # show.html.erb
+      format.html 
       format.json { render json: @trip }
     end
   end
 
-  # GET /trips/new
-  # GET /trips/new.json
   def new
     @trip = Trip.new
     @trip.build_start_location
     @trip.build_end_location
 
       respond_to do |format|
-      format.html # new.html.erb
+      format.html 
       format.json { render json: @trip }
     end
   end
 
-  # GET /trips/1/edit
   def edit
     @trip = Trip.find(params[:id])
   end
 
-  # POST /trips
-  # POST /trips.json
   def create
       @trip =Trip.new(params[:trip])
       respond_to do |format|
@@ -121,8 +112,6 @@ class TripsController < ApplicationController
     end
   end
 
-  # PUT /trips/1
-  # PUT /trips/1.json
   def update
     @trip = Trip.find(params[:id])
 
@@ -138,8 +127,7 @@ class TripsController < ApplicationController
     end
   end
 
-  # DELETE /trips/1
-  # DELETE /trips/1.json
+
   def destroy
     @trip = Trip.find(params[:id])
     @trip.destroy
