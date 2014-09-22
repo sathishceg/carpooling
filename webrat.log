@@ -1,8 +1,0 @@
-# Logfile created on 2012-01-29 12:19:14 +0100 by logger.rb/25413
-REQUESTING PAGE: GET /login with {} and HTTP headers {}
-REQUESTING PAGE: POST /password_resets with {"utf8"=>"✓", "email"=>"", "commit"=>"Reset my password!"} and HTTP headers {"HTTP_REFERER"=>"/login"}
-REQUESTING PAGE: GET http://www.example.com/trips with {} and HTTP headers {"HTTP_REFERER"=>"/password_resets"}
-REQUESTING PAGE: GET /trips with {} and HTTP headers {}
-REQUESTING PAGE: GET /trips with {"utf8"=>"✓", "search_start"=>"", "radius_start"=>"0.5", "search_end"=>"", "radius_end"=>"0.5", "datetime_start"=>{"datetime_start(1i)"=>"2012", "datetime_start(2i)"=>"1", "datetime_start(3i)"=>"29", "datetime_start(4i)"=>"11", "datetime_start(5i)"=>"19"}, "datetime_end"=>{"datetime_end(1i)"=>"2012", "datetime_end(2i)"=>"1", "datetime_end(3i)"=>"30", "datetime_end(4i)"=>"00", "datetime_end(5i)"=>"00"}, "free_seats"=>"", "commit"=>"Search"} and HTTP headers {"HTTP_REFERER"=>"/trips"}
-REQUESTING PAGE: GET /trips with {} and HTTP headers {}
-REQUESTING PAGE: GET /trips with {} and HTTP headers {}
